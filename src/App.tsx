@@ -8,6 +8,7 @@ import Portfolio from "./pages/Portfolio";
 import DigitalTwin from "./pages/DigitalTwin";
 import AssetDetail from "./pages/AssetDetail";
 import Alerts from "./pages/Alerts";
+import Analytics from "./pages/Analytics";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,11 +20,12 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/digital-twin" element={<DigitalTwin />} />
-        <Route path="/asset/:id" element={<AssetDetail />} />
-        <Route path="/alerts" element={<Alerts />} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/digital-twin" element={<DigitalTwin />} />
+          <Route path="/asset/:id" element={<AssetDetail />} />
+          <Route path="/alerts" element={<Alerts />} />
+          <Route path="/analytics" element={<Analytics />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

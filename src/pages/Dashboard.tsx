@@ -47,7 +47,7 @@ const Dashboard = () => {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           <Card className="p-6 border-success/50 bg-card hover:border-success transition-all cursor-pointer group" onClick={() => navigate('/portfolio')}>
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-lg bg-success/20 group-hover:bg-success/30 transition-all">
@@ -99,6 +99,20 @@ const Dashboard = () => {
                 <h3 className="font-semibold text-foreground mb-1">Asset Detail & Health</h3>
                 <p className="text-sm text-muted-foreground">
                   Component health and predictive analytics
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6 border-accent/50 bg-card hover:border-accent transition-all cursor-pointer group" onClick={() => navigate('/analytics')}>
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-lg bg-accent/20 group-hover:bg-accent/30 transition-all">
+                <Zap className="w-6 h-6 text-accent" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-foreground mb-1">Analytics Lab</h3>
+                <p className="text-sm text-muted-foreground">
+                  Advanced diagnostics and anomaly detection
                 </p>
               </div>
             </div>
