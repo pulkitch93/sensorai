@@ -4,16 +4,37 @@ import { mockAssets } from "@/lib/mockData";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Maximize2 } from "lucide-react";
+import { ArrowLeft, Maximize2, Camera } from "lucide-react";
 import { StatusBadge } from "@/components/StatusBadge";
+import { LayerControls, LayerState } from "@/components/digital-twin/LayerControls";
+import { TimelineScrubber } from "@/components/digital-twin/TimelineScrubber";
 
 const DigitalTwin = () => {
   const [selectedAssetId, setSelectedAssetId] = useState<string | null>(null);
+  const [activeLayers, setActiveLayers] = useState<LayerState>({
+    vibration: true,
+    acoustics: false,
+    thermal: true,
+    energy: false,
+    flow: false,
+    pressure: false,
+  });
+  const [layerOpacity, setLayerOpacity] = useState(80);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(Date.now() - 24 * 60 * 60 * 1000);
+  
   const navigate = useNavigate();
 
   const selectedAsset = selectedAssetId 
     ? mockAssets.find(a => a.id === selectedAssetId) 
     : null;
+
+  const handleLayerToggle = (layer: keyof LayerState) => {
+    setActiveLayers(prev => ({ ...prev, [layer]: !prev[layer] }));
+  };
+
+  const startTime = Date.now() - 7 * 24 * 60 * 60 * 1000; // 7 days ago
+  const endTime = Date.now();
 
   return (
     <div className="min-h-screen bg-background p-6">
@@ -29,26 +50,51 @@ const DigitalTwin = () => {
               <p className="text-muted-foreground">Plant Floor 3D Visualization</p>
             </div>
           </div>
-          <Button variant="outline" className="gap-2">
-            <Maximize2 className="w-4 h-4" />
-            Fullscreen
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" className="gap-2">
+              <Camera className="w-4 h-4" />
+              AR View
+            </Button>
+            <Button variant="outline" className="gap-2">
+              <Maximize2 className="w-4 h-4" />
+              Fullscreen
+            </Button>
+          </div>
         </div>
 
+        {/* Timeline Controls */}
+        <TimelineScrubber
+          currentTime={currentTime}
+          startTime={startTime}
+          endTime={endTime}
+          isPlaying={isPlaying}
+          onPlayPause={() => setIsPlaying(!isPlaying)}
+          onTimeChange={setCurrentTime}
+        />
+
         {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* 3D View */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <div className="h-[600px]">
               <DigitalTwin3D 
                 assets={mockAssets} 
                 onAssetClick={setSelectedAssetId}
+                activeLayers={activeLayers}
+                currentTime={currentTime}
               />
             </div>
           </div>
 
-          {/* Asset Details Panel */}
+          {/* Right Sidebar */}
           <div className="space-y-4">
+            {/* Layer Controls */}
+            <LayerControls
+              layers={activeLayers}
+              onLayerToggle={handleLayerToggle}
+              opacity={layerOpacity}
+              onOpacityChange={setLayerOpacity}
+            />
             {selectedAsset ? (
               <>
                 <Card className="p-6 border-primary/50">

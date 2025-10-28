@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { Asset } from "@/types/asset";
+import { LayerState } from "./digital-twin/LayerControls";
 
 interface DigitalTwin3DProps {
   assets: Asset[];
   onAssetClick: (assetId: string) => void;
+  activeLayers: LayerState;
+  currentTime?: number;
 }
 
-export const DigitalTwin3D = ({ assets, onAssetClick }: DigitalTwin3DProps) => {
+export const DigitalTwin3D = ({ assets, onAssetClick, activeLayers, currentTime }: DigitalTwin3DProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene>();
   const cameraRef = useRef<THREE.PerspectiveCamera>();
@@ -115,6 +118,20 @@ export const DigitalTwin3D = ({ assets, onAssetClick }: DigitalTwin3DProps) => {
       scene.add(mesh);
       assetMeshesRef.current.set(asset.id, mesh);
 
+      // Add alert badge for assets with alerts
+      if (asset.alerts > 0) {
+        const badgeGeometry = new THREE.SphereGeometry(0.5, 16, 16);
+        const badgeMaterial = new THREE.MeshBasicMaterial({
+          color: asset.status === 'critical' ? 0xef4444 : 0xf59e0b,
+          transparent: true,
+          opacity: 0.9,
+        });
+        const badge = new THREE.Mesh(badgeGeometry, badgeMaterial);
+        badge.position.set(asset.location.x + 2.5, 6, asset.location.z + 2.5);
+        badge.userData = { type: 'alertBadge', assetId: asset.id };
+        scene.add(badge);
+      }
+
       // Add label
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d')!;
@@ -177,6 +194,14 @@ export const DigitalTwin3D = ({ assets, onAssetClick }: DigitalTwin3DProps) => {
         }
       }
 
+      // Blink alert badges
+      scene.children.forEach((child) => {
+        if (child.userData.type === 'alertBadge' && child instanceof THREE.Mesh) {
+          const material = child.material as THREE.MeshBasicMaterial;
+          material.opacity = 0.6 + Math.sin(Date.now() * 0.005) * 0.4;
+        }
+      });
+
       renderer.render(scene, camera);
     };
     animate();
@@ -197,6 +222,20 @@ export const DigitalTwin3D = ({ assets, onAssetClick }: DigitalTwin3DProps) => {
       containerRef.current?.removeChild(renderer.domElement);
     };
   }, [assets, selectedAsset, onAssetClick]);
+
+  // Update asset states based on currentTime for playback
+  useEffect(() => {
+    if (!currentTime) return;
+    
+    assets.forEach((asset) => {
+      const mesh = assetMeshesRef.current.get(asset.id);
+      if (mesh && mesh.material instanceof THREE.MeshStandardMaterial) {
+        // Simulate historical state changes based on time
+        const timeOffset = Math.sin(currentTime / 10000) * 0.3;
+        mesh.material.emissiveIntensity = 0.2 + timeOffset;
+      }
+    });
+  }, [currentTime, assets]);
 
   return (
     <div ref={containerRef} className="w-full h-full rounded-lg overflow-hidden border border-border" />
