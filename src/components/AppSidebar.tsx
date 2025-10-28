@@ -10,6 +10,7 @@ import {
   Activity,
   Cpu,
   FileBarChart,
+  Headphones,
 } from "lucide-react";
 import {
   Sidebar,
@@ -33,6 +34,7 @@ const navigationItems = [
   { title: "Prescriptions & Workflows", url: "/prescriptions", icon: FileCheck },
   { title: "Sensor Hub", url: "/sensors", icon: Cpu },
   { title: "Reports & Analytics", url: "/reports", icon: FileBarChart },
+  { title: "24x7 Support", url: "/support", icon: Headphones },
 ];
 
 export function AppSidebar() {
