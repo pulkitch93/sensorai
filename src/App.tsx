@@ -18,6 +18,7 @@ import Support from "./pages/Support";
 import Agents from "./pages/Agents";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import Footer from "./components/Footer";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ const App = () => (
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
+              <Footer />
             </div>
           </div>
         </SidebarProvider>
