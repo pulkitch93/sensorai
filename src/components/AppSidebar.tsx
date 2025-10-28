@@ -9,6 +9,7 @@ import {
   MapPin,
   Activity,
   Cpu,
+  FileBarChart,
 } from "lucide-react";
 import {
   Sidebar,
@@ -31,6 +32,7 @@ const navigationItems = [
   { title: "Analytics Lab", url: "/analytics", icon: FlaskConical },
   { title: "Prescriptions & Workflows", url: "/prescriptions", icon: FileCheck },
   { title: "Sensor Hub", url: "/sensors", icon: Cpu },
+  { title: "Reports & Analytics", url: "/reports", icon: FileBarChart },
 ];
 
 export function AppSidebar() {

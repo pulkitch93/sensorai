@@ -13,6 +13,7 @@ import Alerts from "./pages/Alerts";
 import Analytics from "./pages/Analytics";
 import Prescriptions from "./pages/Prescriptions";
 import Sensors from "./pages/Sensors";
+import Reports from "./pages/Reports";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
                   <Route path="/analytics" element={<Analytics />} />
                   <Route path="/prescriptions" element={<Prescriptions />} />
                   <Route path="/sensors" element={<Sensors />} />
+                  <Route path="/reports" element={<Reports />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
