@@ -47,7 +47,21 @@ const Dashboard = () => {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <Card className="p-6 border-success/50 bg-card hover:border-success transition-all cursor-pointer group" onClick={() => navigate('/portfolio')}>
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-lg bg-success/20 group-hover:bg-success/30 transition-all">
+                <TrendingUp className="w-6 h-6 text-success" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-foreground mb-1">Portfolio</h3>
+                <p className="text-sm text-muted-foreground">
+                  Executive overview and KPIs
+                </p>
+              </div>
+            </div>
+          </Card>
+
           <Card className="p-6 border-primary/50 bg-card hover:border-primary transition-all cursor-pointer group" onClick={() => navigate('/digital-twin')}>
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-lg bg-primary/20 group-hover:bg-primary/30 transition-all">
@@ -76,10 +90,10 @@ const Dashboard = () => {
             </div>
           </Card>
 
-          <Card className="p-6 border-success/50 bg-card hover:border-success transition-all cursor-pointer group">
+          <Card className="p-6 border-chart-2/50 bg-card hover:border-chart-2 transition-all cursor-pointer group">
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-lg bg-success/20 group-hover:bg-success/30 transition-all">
-                <TrendingUp className="w-6 h-6 text-success" />
+              <div className="p-3 rounded-lg bg-chart-2/20 group-hover:bg-chart-2/30 transition-all">
+                <Settings className="w-6 h-6 text-chart-2" />
               </div>
               <div>
                 <h3 className="font-semibold text-foreground mb-1">Analytics</h3>
