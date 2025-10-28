@@ -90,15 +90,15 @@ const Dashboard = () => {
             </div>
           </Card>
 
-          <Card className="p-6 border-chart-2/50 bg-card hover:border-chart-2 transition-all cursor-pointer group">
+          <Card className="p-6 border-chart-2/50 bg-card hover:border-chart-2 transition-all cursor-pointer group" onClick={() => navigate('/asset/asset-1')}>
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-lg bg-chart-2/20 group-hover:bg-chart-2/30 transition-all">
-                <Settings className="w-6 h-6 text-chart-2" />
+                <Activity className="w-6 h-6 text-chart-2" />
               </div>
               <div>
-                <h3 className="font-semibold text-foreground mb-1">Analytics</h3>
+                <h3 className="font-semibold text-foreground mb-1">Asset Detail & Health</h3>
                 <p className="text-sm text-muted-foreground">
-                  View trends and performance metrics
+                  Component health and predictive analytics
                 </p>
               </div>
             </div>
