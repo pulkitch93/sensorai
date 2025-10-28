@@ -11,6 +11,7 @@ import {
   Cpu,
   FileBarChart,
   Headphones,
+  ShieldCheck,
 } from "lucide-react";
 import {
   Sidebar,
@@ -35,6 +36,7 @@ const navigationItems = [
   { title: "Sensor Hub", url: "/sensors", icon: Cpu },
   { title: "Reports & Analytics", url: "/reports", icon: FileBarChart },
   { title: "24x7 Support", url: "/support", icon: Headphones },
+  { title: "Admin & Governance", url: "/admin", icon: ShieldCheck },
 ];
 
 export function AppSidebar() {
