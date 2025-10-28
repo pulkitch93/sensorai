@@ -126,7 +126,7 @@ const Dashboard = () => {
               <Activity className="w-5 h-5 text-primary" />
               Assets Requiring Attention
             </h2>
-            <Button variant="outline" size="sm" onClick={() => navigate('/digital-twin')}>
+            <Button variant="outline" size="sm" onClick={() => navigate('/alerts')}>
               View All
             </Button>
           </div>
