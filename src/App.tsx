@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
+import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Portfolio from "./pages/Portfolio";
 import DigitalTwin from "./pages/DigitalTwin";
@@ -28,35 +29,43 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <SidebarProvider>
-          <div className="flex min-h-screen w-full">
-            <AppSidebar />
-            <div className="flex-1 flex flex-col">
-              <header className="h-12 flex items-center border-b border-border bg-background px-4 sticky top-0 z-10">
-                <SidebarTrigger />
-              </header>
-              <main className="flex-1">
-                <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="/portfolio" element={<Portfolio />} />
-                  <Route path="/digital-twin" element={<DigitalTwin />} />
-                  <Route path="/asset/:id" element={<AssetDetail />} />
-                  <Route path="/alerts" element={<Alerts />} />
-                  <Route path="/analytics" element={<Analytics />} />
-                  <Route path="/prescriptions" element={<Prescriptions />} />
-                  <Route path="/sensors" element={<Sensors />} />
-                  <Route path="/reports" element={<Reports />} />
-                  <Route path="/support" element={<Support />} />
-                  <Route path="/agents" element={<Agents />} />
-                  <Route path="/admin" element={<Admin />} />
-                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </main>
-              <Footer />
-            </div>
-          </div>
-        </SidebarProvider>
+        <Routes>
+          {/* Marketing Home Page - No Sidebar */}
+          <Route path="/" element={<Home />} />
+          
+          {/* App Routes - With Sidebar */}
+          <Route path="/*" element={
+            <SidebarProvider>
+              <div className="flex min-h-screen w-full">
+                <AppSidebar />
+                <div className="flex-1 flex flex-col">
+                  <header className="h-12 flex items-center border-b border-border bg-background px-4 sticky top-0 z-10">
+                    <SidebarTrigger />
+                  </header>
+                  <main className="flex-1">
+                    <Routes>
+                      <Route path="/dashboard" element={<Dashboard />} />
+                      <Route path="/portfolio" element={<Portfolio />} />
+                      <Route path="/digital-twin" element={<DigitalTwin />} />
+                      <Route path="/asset/:id" element={<AssetDetail />} />
+                      <Route path="/alerts" element={<Alerts />} />
+                      <Route path="/analytics" element={<Analytics />} />
+                      <Route path="/prescriptions" element={<Prescriptions />} />
+                      <Route path="/sensors" element={<Sensors />} />
+                      <Route path="/reports" element={<Reports />} />
+                      <Route path="/support" element={<Support />} />
+                      <Route path="/agents" element={<Agents />} />
+                      <Route path="/admin" element={<Admin />} />
+                      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </main>
+                  <Footer />
+                </div>
+              </div>
+            </SidebarProvider>
+          } />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

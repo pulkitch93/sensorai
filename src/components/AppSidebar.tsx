@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/sidebar";
 
 const navigationItems = [
-  { title: "Dashboard", url: "/", icon: Home },
+  { title: "Dashboard", url: "/dashboard", icon: Home },
   { title: "Portfolio", url: "/portfolio", icon: TrendingUp },
   { title: "Digital Twin", url: "/digital-twin", icon: MapPin },
   { title: "Asset Detail", url: "/asset/asset-1", icon: Activity },
