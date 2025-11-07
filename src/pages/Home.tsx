@@ -45,7 +45,7 @@ const Home = () => {
       <section className="container mx-auto px-4 py-20 md:py-32">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-            Asset Intelligence for <span className="text-primary">Industry</span>
+            Asset Intelligence (AI) for <span className="text-primary">Industry</span>
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
             Transform your industrial operations with AI-powered predictive maintenance 
