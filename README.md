@@ -1,4 +1,4 @@
-# Asset Intelligence (AI) Platform
+# SensorAI Platform
 
 A comprehensive AI-powered industrial asset management and predictive maintenance platform built with React, TypeScript, and modern web technologies.
 
